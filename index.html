@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f8dce8">
+<title>Our Little Universe — Vol. 02</title>
+<style>
+:root{--pink:#f7dce7;--rose:#d982a5;--deep:#9e456b;--cream:#fff9f5;--ink:#553847;--red:#c85d78}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Georgia,'Times New Roman',serif}
+button,a{font:inherit}
+button{cursor:pointer}
+.hero{min-height:100svh;display:grid;place-items:center;text-align:center;padding:28px 18px;position:relative;overflow:hidden;background:radial-gradient(circle at 20% 20%,#fff 0 5%,transparent 30%),linear-gradient(145deg,#fceaf0,#f4cbdc 60%,#fbe9df)}
+.hero:before,.hero:after{content:"♡";position:absolute;color:#fff8;font-size:clamp(100px,25vw,240px);transform:rotate(-18deg)}
+.hero:before{top:2%;left:3%}.hero:after{bottom:-5%;right:2%;transform:rotate(18deg)}
+.hero-inner{position:relative;z-index:1;max-width:620px}
+.eyebrow{letter-spacing:.18em;text-transform:uppercase;font:11px Arial,sans-serif;color:var(--deep)}
+h1{font-size:clamp(42px,10vw,78px);line-height:.98;margin:14px 0;color:#88425f;font-weight:normal}
+.subtitle{font-style:italic;font-size:18px}
+.primary,.small-btn{border:0;border-radius:999px;background:var(--deep);color:white;padding:14px 24px;box-shadow:0 7px 18px #9e456b33;transition:.2s}
+.primary:hover,.small-btn:hover{transform:translateY(-2px);background:#7e3454}
+.envelope{font-size:76px;display:block;margin:22px auto 8px;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-9px) rotate(2deg)}}
+nav{position:sticky;top:0;z-index:10;background:#fffaf2ed;backdrop-filter:blur(10px);border-bottom:1px solid #efd3df;display:flex;gap:8px;overflow:auto;padding:10px 12px;justify-content:center}
+nav a{white-space:nowrap;text-decoration:none;color:var(--deep);font:12px Arial,sans-serif;padding:8px 11px;border-radius:20px}
+nav a:hover{background:var(--pink)}
+main{max-width:980px;margin:auto;padding:20px}
+section{padding:58px 0;border-bottom:1px dashed #dfb2c5;scroll-margin-top:60px}
+.section-tag{font:11px Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--rose)}
+h2{font-size:clamp(30px,6vw,46px);font-weight:normal;color:#88425f;margin:8px 0 12px}
+.intro{max-width:650px;line-height:1.7}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:22px}
+.card{background:#fff;border:1px solid #f0d5e0;border-radius:18px;padding:18px;box-shadow:0 8px 22px #8b4b6410}
+.card h3{margin:0 0 8px;color:#984d6d;font-weight:normal;font-size:22px}
+.card p{line-height:1.55;margin:8px 0}
+.envelope-card{border:1px solid #e8bdcf;background:linear-gradient(145deg,#fff,#fff2f6);border-radius:16px;padding:20px;text-align:center;min-height:130px;color:var(--deep)}
+.envelope-card button{border:0;background:none;color:inherit;width:100%;font-size:18px}
+.reveal{display:none;margin-top:12px;padding:12px;border-radius:12px;background:#fceaf1;line-height:1.55}
+.reveal.show{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.heart-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:9px;margin-top:22px}
+.heart{border:0;background:#fce8ef;color:#bd5c7f;border-radius:14px;aspect-ratio:1;font-size:clamp(19px,4vw,28px);transition:.2s}
+.heart:hover{transform:scale(1.08);background:#f6d2e0}
+.progress{font:13px Arial,sans-serif;color:#9b6179;margin-top:12px}
+.quizbox{max-width:620px}
+.option{display:block;width:100%;text-align:left;border:1px solid #edcbd8;background:#fff;border-radius:12px;padding:12px 14px;margin:9px 0;color:var(--ink)}
+.option:hover{background:#fff0f5}
+.feedback{min-height:26px;color:var(--deep);font-style:italic;margin-top:12px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px}
+.polaroid{background:#fff;padding:10px 10px 18px;box-shadow:0 5px 18px #75445720;transform:rotate(var(--tilt));}
+.polaroid img{width:100%;aspect-ratio:1;object-fit:cover;background:#f8e4ec;display:block}
+.polaroid input{width:100%;margin-top:8px;font:12px Arial,sans-serif}
+.polaroid p{text-align:center;margin:9px 0 0;font-style:italic}
+input[type=file]{max-width:100%;font:13px Arial,sans-serif}
+.bucket label{display:flex;gap:10px;align-items:flex-start;padding:12px;border-bottom:1px solid #f2dce5;line-height:1.4}
+.bucket input{accent-color:#b65c7c;margin-top:3px}
+.letter{background:#fffdf9;border:1px solid #ecd3c3;padding:clamp(20px,5vw,42px);border-radius:8px;box-shadow:0 8px 24px #704b3612;line-height:1.9;font-size:17px;white-space:pre-wrap}
+textarea{width:100%;min-height:170px;border:1px solid #e8c5d3;border-radius:12px;padding:14px;background:#fff;font:16px Georgia;color:var(--ink);line-height:1.6}
+footer{text-align:center;padding:45px 15px;color:#a66a82;font-style:italic}
+.modal{position:fixed;inset:0;background:#4a2639aa;display:none;place-items:center;padding:20px;z-index:30}
+.modal.show{display:grid}
+.modal-inner{max-width:520px;width:100%;background:#fff8f5;border-radius:22px;padding:28px;text-align:center;box-shadow:0 20px 60px #29101f55}
+.modal-inner h2{font-size:34px}
+.close{border:0;background:#f7dce7;color:#88425f;border-radius:50%;width:36px;height:36px}
+.music-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.note{font:12px Arial,sans-serif;color:#9d7182}
+@media(max-width:520px){nav{justify-content:flex-start}.heart-grid{grid-template-columns:repeat(5,1fr)}main{padding:16px}.hero{min-height:92svh}}
+</style>
+</head>
+<body>
+<header class="hero" id="top">
+ <div class="hero-inner">
+  <div class="eyebrow">A tiny digital keepsake · volume two</div>
+  <span class="envelope">💌</span>
+  <h1>Our Little<br>Universe</h1>
+  <p class="subtitle">Two months, a thousand little moments.</p>
+  <p>Someone made a little universe just for you.</p>
+  <button class="primary" onclick="document.querySelector('#story').scrollIntoView({behavior:'smooth'})">Open your surprise ♡</button>
+ </div>
+</header>
+<nav aria-label="Main navigation">
+ <a href="#story">Our story</a><a href="#openwhen">Open when</a><a href="#quiz">Quiz</a><a href="#reasons">60 reasons</a><a href="#gallery">Gallery</a><a href="#soundtrack">Soundtrack</a><a href="#someday">Someday</a><a href="#letter">Letter</a>
+</nav>
+<main>
+<section id="story">
+ <div class="section-tag">01 · the beginning</div><h2>Our story</h2>
+ <p class="intro">Every little story has a beginning. Add your dates, memories and the moments that became yours. Replace the sample cards with your real memories.</p>
+ <div class="grid">
+  <article class="card"><h3>The first hello</h3><p>[Add how you first started talking.]</p><span class="note">[Add date]</span></article>
+  <article class="card"><h3>When it became us</h3><p>[Add the moment your relationship began.]</p><span class="note">[Add date]</span></article>
+  <article class="card"><h3>Two months later</h3><p>Still collecting little reasons to smile because of you.</p><span class="note">November 2026</span></article>
+ </div>
+</section>
+<section id="openwhen">
+ <div class="section-tag">02 · little notes for later</div><h2>Open when…</h2>
+ <p class="intro">Choose an envelope. Each one has a note waiting inside.</p>
+ <div class="grid" id="envelopes"></div>
+</section>
+<section id="quiz">
+ <div class="section-tag">03 · let's see what you remember</div><h2>How well do you know me?</h2>
+ <div class="card quizbox">
+  <p id="question">Ready for the little quiz?</p><div id="options"></div>
+  <div class="feedback" id="quizFeedback">No pressure. This is just for fun ♡</div>
+  <button class="small-btn" id="startQuiz">Start quiz</button>
+ </div>
+</section>
+<section id="reasons">
+ <div class="section-tag">04 · tiny hearts, big feelings</div><h2>60 little reasons</h2>
+ <p class="intro">Tap each heart to reveal a reason. Personalise the list in the script near the bottom of this file.</p>
+ <div class="heart-grid" id="heartGrid"></div><div class="progress" id="heartProgress">0 of 60 opened</div>
+</section>
+<section id="gallery">
+ <div class="section-tag">05 · moments worth keeping</div><h2>Our little gallery</h2>
+ <p class="intro">Add photos from your device. They appear here as little polaroids. Photos are only previewed in this browser; they are not uploaded anywhere.</p>
+ <div class="card"><input type="file" id="photoInput" accept="image/*" multiple><p class="note">Choose one or more photos to add to this page.</p></div>
+ <div class="gallery" id="photoGallery" style="margin-top:22px"></div>
+</section>
+<section id="soundtrack">
+ <div class="section-tag">06 · songs that sound like us</div><h2>Our soundtrack</h2>
+ <p class="intro">Add songs that remind you of each other. Paste a YouTube or music link in the link box, then open it together.</p>
+ <div class="grid">
+  <div class="card"><h3>Our song</h3><p>[Song title — artist]</p><a href="#" onclick="return false">Add your song link in the HTML</a></div>
+  <div class="card"><h3>When I think of you</h3><p>[Song title — artist]</p><span class="note">[Why it reminds you of him]</span></div>
+ </div>
+ <p class="note">Music does not autoplay. Use a music link you have permission to share.</p>
+</section>
+<section id="someday">
+ <div class="section-tag">07 · a list for the future</div><h2>Someday, with you</h2>
+ <p class="intro">Tick off the little things you want to do together someday. Your progress is saved on this device.</p>
+ <div class="card bucket" id="bucketList"></div>
+</section>
+<section id="letter">
+ <div class="section-tag">08 · the last envelope</div><h2>A letter for you</h2>
+ <p class="intro">A little space for the words you want him to keep.</p>
+ <div class="letter" id="loveLetter">Happy two months, my love.
+
+I wish I could hand you this letter in person, but for now, here's a little piece of my heart on your screen.
+
+Thank you for the laughs, the conversations, the silly moments and all the little ways you make ordinary days feel special.
+
+I hope we keep learning about each other, cheering each other on and making memories—one day at a time.
+
+Here's to our next chapter. ♡
+
+— Your favourite person</div>
+ <p class="note">To personalise: edit the letter text directly in the HTML file.</p>
+</section>
+<section id="final">
+ <div class="section-tag">09 · one last thing</div><h2>One last thing…</h2>
+ <p class="intro">Some surprises are better opened slowly.</p>
+ <button class="primary" onclick="document.getElementById('finalModal').classList.add('show')">Open the final surprise ♡</button>
+</section>
+</main>
+<footer>Made with a little time, a lot of thought, and love. ♡<br><span class="note">Our Little Universe · Vol. 02</span></footer>
+<div class="modal" id="finalModal" role="dialog" aria-modal="true" aria-label="Final surprise" onclick="if(event.target===this)this.classList.remove('show')">
+ <div class="modal-inner"><button class="close" onclick="document.getElementById('finalModal').classList.remove('show')" aria-label="Close">×</button><div style="font-size:48px">🌷</div><h2>My favourite chapter</h2><p style="font-size:18px;line-height:1.7">Distance is just a little space between two people who still have so much to learn, laugh about and experience together. Happy two months. Here's to the memories still waiting for us. ♡</p></div>
+</div>
+<script>
+// PERSONALISE THESE MESSAGES BEFORE SHARING.
+const notes = [
+ ["Open when you miss me","I hope this little note makes the distance feel a bit smaller. I'm thinking of you, too. ♡"],
+ ["Open when you're sad","You don't have to pretend to be okay with me. Take your time, and remember you don't have to handle every hard day alone."],
+ ["Open when you need a laugh","Remember that we're both a little ridiculous. I hope this makes you smile. 😭"],
+ ["Open when you can't sleep","I hope your mind gets quiet and you get the rest you deserve. Goodnight, sleepyhead. 🌙"],
+ ["Open when you need a reminder","You matter to me—not because you have to be perfect, but because you're you."]
+];
+const env=document.getElementById('envelopes');
+notes.forEach((n,i)=>{const d=document.createElement('div');d.className='envelope-card';d.innerHTML=`<button aria-expanded="false">💌<br>${n[0]}</button><div class="reveal"></div>`;d.querySelector('button').onclick=()=>{const r=d.querySelector('.reveal');r.textContent=n[1];r.classList.toggle('show');d.querySelector('button').setAttribute('aria-expanded',r.classList.contains('show'))};env.appendChild(d)});
+
+const reasons=[
+"Your smile.","The way you make me laugh.","Your little habits.","How you tell me about your day.","Your sense of humour.",
+"The way you remember little things.","Your voice.","Your honesty.","Your kindness.","How you keep trying.",
+"Your enthusiasm.","Your random thoughts.","The way you say my name.","Your patience.","Your silly jokes.",
+"How you make ordinary chats memorable.","Your curiosity.","Your determination.","Your perspective.","Your laugh.",
+"How you share your interests.","Your thoughtful messages.","Your creativity.","Your warmth.","The little details only you notice.",
+"How you encourage me.","Your favourite stories.","Your individuality.","Your expressions.","The way you get excited.",
+"Your ability to make me smile.","Your good-morning messages.","Your goodnight messages.","Your playlists.","Your opinions.",
+"Your confidence when you care about something.","Your softness with people you trust.","Your dreams.","Your effort.","Your little surprises.",
+"The way you listen.","Your funny reactions.","Your honesty about your feelings.","Your curiosity about the world.","Your favourite things.",
+"How you keep learning.","Your determination to grow.","The memories we've made.","The memories still ahead.","Simply being you.",
+"Your smile on a hard day.","Your silly side.","Your thoughtful side.","Your unique way of seeing things.","Your messages that arrive at the right time.",
+"The way we can be weird together.","The little things that make you, you.","The fact that we're still discovering each other.","Our inside jokes.","This little chapter with you."
+];
+const opened=new Set();const hg=document.getElementById('heartGrid');
+reasons.forEach((r,i)=>{const b=document.createElement('button');b.className='heart';b.textContent='♡';b.setAttribute('aria-label',`Reveal reason ${i+1}`);b.onclick=()=>{opened.add(i);document.getElementById('modalText').textContent=r;document.getElementById('heartModal').classList.add('show');document.getElementById('heartProgress').textContent=`${opened.size} of 60 opened`};hg.appendChild(b)});
+const heartModal=document.createElement('div');heartModal.className='modal';heartModal.id='heartModal';heartModal.innerHTML='<div class="modal-inner"><button class="close" aria-label="Close">×</button><div style="font-size:42px">♡</div><h2>A little reason</h2><p id="modalText" style="font-size:20px;line-height:1.6"></p></div>';document.body.appendChild(heartModal);heartModal.querySelector('.close').onclick=()=>heartModal.classList.remove('show');heartModal.onclick=e=>{if(e.target===heartModal)heartModal.classList.remove('show')};
+
+const questions=[
+ {q:"Which little thing makes me happiest?",a:["A thoughtful message","A maths worksheet","A broken Wi-Fi signal"],correct:0},
+ {q:"What's the best way to make a memory together?",a:["Be present and have fun","Compete over everything","Spend the whole time scrolling"],correct:0},
+ {q:"What should you do if you don't know an answer in this quiz?",a:["Make a confident guess","Ask for a hint","Blame the quiz"],correct:1}
+];let qi=0,score=0;
+const qEl=document.getElementById('question'),opts=document.getElementById('options'),fb=document.getElementById('quizFeedback'),start=document.getElementById('startQuiz');
+function showQ(){const q=questions[qi];qEl.textContent=`${qi+1}/${questions.length} · ${q.q}`;opts.innerHTML='';q.a.forEach((a,i)=>{const b=document.createElement('button');b.className='option';b.textContent=a;b.onclick=()=>{[...opts.children].forEach(x=>x.disabled=true);if(i===q.correct){score++;fb.textContent="Correct! You know me pretty well. ♡"}else fb.textContent="Not quite! That's okay—now you know. ♡";setTimeout(()=>{qi++;if(qi<questions.length)showQ();else{qEl.textContent=`You got ${score} out of ${questions.length}!`;opts.innerHTML='';fb.textContent="The best part is that we get to keep learning about each other.";start.textContent="Play again";start.style.display='inline-block'}},850)};opts.appendChild(b)});start.style.display='none'}
+start.onclick=()=>{qi=0;score=0;fb.textContent="Choose your answer!";showQ()};
+const bucketItems=["Have a proper movie night together.","Make a playlist for each other.","Take silly matching pictures.","Visit a place we've talked about.","Try each other's favourite snacks.","Celebrate another anniversary."];
+const bucket=document.getElementById('bucketList');bucketItems.forEach((t,i)=>{const l=document.createElement('label');l.innerHTML=`<input type="checkbox" data-item="${i}"><span>${t}</span>`;const cb=l.querySelector('input');cb.checked=localStorage.getItem('universe-bucket-'+i)==='1';cb.onchange=()=>localStorage.setItem('universe-bucket-'+i,cb.checked?'1':'0');bucket.appendChild(l)});
+document.getElementById('photoInput').addEventListener('change',e=>{const gallery=document.getElementById('photoGallery');[...e.target.files].forEach((file,i)=>{if(!file.type.startsWith('image/'))return;const url=URL.createObjectURL(file);const d=document.createElement('div');d.className='polaroid';d.style.setProperty('--tilt',`${(i%2?1:-1)*2}deg`);const img=document.createElement('img');img.src=url;img.alt='Your memory';const p=document.createElement('p');p.textContent='A little memory ♡';d.append(img,p);gallery.appendChild(d)})});
+</script>
+</body>
+</html>
